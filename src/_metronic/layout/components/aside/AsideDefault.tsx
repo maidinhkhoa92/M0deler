@@ -1,14 +1,10 @@
-import {Link} from 'react-router-dom'
 import clsx from 'clsx'
 import {useLayout} from '../../core'
-import {toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
 import {AsideUserMenu} from '../../../partials'
-import {useThemeMode} from '../../../partials/layout/theme-mode/ThemeModeProvider'
 
 const AsideDefault = () => {
   const {classes} = useLayout()
-  const {mode} = useThemeMode()
   return (
     <div
       id='kt_aside'
