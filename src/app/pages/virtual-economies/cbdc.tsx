@@ -46,43 +46,17 @@ const ColumnsSandbox = [
   },
 ]
 
-const DataSandbox = [
-  {
-      "cbdc_name": "initial launch2",
-      "engine": "mit-opencbdc-2pc",
-      "wallets_qty": 20,
-      "tx_avg_nominal_amt": 100,
-      "tx_nominal_amt_sd": 10,
-      "txs": 200,
-      "initial_balance_avg": 1000,
-      "initial_bal_sd": 50
-  },
-  {
-      "cbdc_name": "initial launch444",
-      "engine": "mit-opencbdc-2pc",
-      "wallets_qty": 20,
-      "tx_avg_nominal_amt": 100,
-      "tx_nominal_amt_sd": 10,
-      "txs": 200,
-      "initial_balance_avg": 2000,
-      "initial_bal_sd": 50
-  }
-]
-
 const CBDC = () => {
   const {
     isLoading,
     data,
-    error,
   } = useQuery(
     `CBDC`,
     getCBDC
   )
 
-  console.log("CBDC", isLoading, data, error)
-
   return (
-  <Table className='mb-5 mb-xl-10' title="CBDC" columns={ColumnsSandbox} data={DataSandbox} />
+  <Table className='mb-5 mb-xl-10' title="CBDC" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} />
 )}
 
 export default CBDC

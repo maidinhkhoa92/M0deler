@@ -26,7 +26,7 @@ const TBody: React.FC<TBodyProps> = ({
           return <></>
         }
       }
-      
+
       return (
         <tr key={i}>
           {columns.map((column, k) => {
@@ -47,7 +47,7 @@ const TBody: React.FC<TBodyProps> = ({
   </tbody>
 )
 
-const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data, isPaging }) => {
+const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data, isPaging, isLoading }) => {
   const [page, setPage] = useState<number>(1)
 
   const pages = useMemo(() => {
@@ -62,28 +62,35 @@ const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data
   }, [data])
 
   return (
-    <div className={`card ${className}`}>
+    <div className={`card ${className} position-relative`}>
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
           {title && <span className='card-label fw-bold fs-3 mb-1'>{title}</span>}
           {subtitle && <span className='text-muted mt-1 fw-semibold fs-7'>{subtitle}</span>}
         </h3>
       </div>
-      <div className='card-body py-3'>
-        <div className='table-responsive'>
-          <table className='table align-middle gs-0 gy-4'>
-            {/* begin::Table head */}
-            <THeader columns={columns} data={data} />
-            {/* end::Table head */}
-            {/* begin::Table body */}
-            <TBody columns={columns} data={data} page={page} isPaging={isPaging} />
-            {/* end::Table body */}
-          </table>
-          {/* end::Table */}
-        </div>
-        {/* end::Table container */}
-        {isPaging && <Pagination pages={pages} page={page} setPage={setPage}/>}
-      </div>
+      {isLoading ? (<span
+        className='w-100 translate-middle-y lh-0 my-auto d-flex align-items-center justify-content-center'
+        data-kt-search-element='spinner'
+      >
+        <span className='spinner-border h-35px w-35px align-middle text-gray-400' />
+      </span>) : (
+        <div className='card-body py-3'>
+          <div className='table-responsive'>
+            <table className='table align-middle gs-0 gy-4'>
+              {/* begin::Table head */}
+              <THeader columns={columns} data={data} />
+              {/* end::Table head */}
+              {/* begin::Table body */}
+              <TBody columns={columns} data={data} page={page} isPaging={isPaging} />
+              {/* end::Table body */}
+            </table>
+            {/* end::Table */}
+          </div>
+          {/* end::Table container */}
+          {isPaging && <Pagination pages={pages} page={page} setPage={setPage} />}
+        </div>)}
+
       {/* begin::Body */}
     </div>
   )

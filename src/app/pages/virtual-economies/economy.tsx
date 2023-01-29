@@ -31,37 +31,17 @@ const ColumnsSandbox = [
   },
 ]
 
-const DataSandbox = [
-  {
-    "economy_name": "wakanda",
-    "gdp": 600000000,
-    "ir": 310,
-    "gr": 300,
-    "pop": 10
-  },
-  {
-    "economy_name": "wakanda444",
-    "gdp": 600000000,
-    "ir": 210,
-    "gr": 100,
-    "pop": 10
-  }
-]
-
 const Economy = () => {
   const {
     isLoading,
     data,
-    error,
   } = useQuery(
     `Economy`,
     getEconomy
   )
 
-  console.log("Economy", isLoading, data, error)
-
   return (
-    <Table className='mb-5 mb-xl-10' title="Economy" columns={ColumnsSandbox} data={DataSandbox} />
+    <Table className='mb-5 mb-xl-10' title="Economy" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} />
   )
 }
 

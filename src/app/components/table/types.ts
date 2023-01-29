@@ -21,6 +21,7 @@ export interface TableProps {
   data: Data[]
   loading?: boolean
   isPaging?: boolean
+  isLoading?: boolean
 }
 
 export interface THeadProps {

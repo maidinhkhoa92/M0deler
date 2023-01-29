@@ -22,7 +22,7 @@ const AsideUserMenu: FC = () => {
             <a href='#' className='text-gray-800 text-hover-primary fs-6 fw-bolder lh-1'>
               {currentUser?.first_name} {currentUser?.first_name}
             </a>
-            <span className='text-muted fw-bold d-block fs-7 lh-1'>Python Dev</span>
+            <span className='text-muted fw-bold d-block fs-7 lh-1'>Founder & CEO of Instamint</span>
           </div>
           {/* end::User info */}
         </div>

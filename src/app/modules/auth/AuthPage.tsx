@@ -25,13 +25,13 @@ const AuthLayout = () => {
         <a href='#' className='mb-12'>
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/default-dark.svg')}
-            className='theme-dark-show h-45px'
+            src={toAbsoluteUrl('/media/logos/default.png')}
+            className='theme-dark-show h-100px'
           />
           <img
             alt='Logo'
-            src={toAbsoluteUrl('/media/logos/default.svg')}
-            className='theme-light-show h-45px'
+            src={toAbsoluteUrl('/media/logos/default.png')}
+            className='theme-light-show h-100px'
           ></img>
         </a>
         {/* end::Logo */}

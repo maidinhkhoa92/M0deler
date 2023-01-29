@@ -38,32 +38,17 @@ const ColumnsSandbox = [
   }
 ]
 
-const DataSandbox = [
-  {
-      "sandbox_name": "q2",
-      "economy_name": "wakanda",
-      "cbdc_name": "initial launch2"
-  },
-  {
-      "sandbox_name": "q4",
-      "economy_name": "wakanda444",
-      "cbdc_name": "initial launch444"
-  }
-]
-
 const Sandbox = () => {
   const {
     isLoading,
     data,
-    error,
   } = useQuery(
     `sandbox`,
     getSandbox
   )
 
-  console.log("Sandbox", isLoading, data, error)
   return (
-    <Table className='mb-5 mb-xl-10' title="Sandbox" columns={ColumnsSandbox} data={DataSandbox} />
+    <Table className='mb-5 mb-xl-10' title="Sandbox" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} />
   )
 }
 

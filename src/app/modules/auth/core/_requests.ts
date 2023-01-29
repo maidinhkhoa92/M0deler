@@ -53,9 +53,9 @@ export function getUserByToken(token: string): Promise<{data: UserModel}> {
     resolve({
       data: {
         email : "jamiel@m0deler.com",
-        first_name:"Amani",
+        first_name:"Jamiel",
         id:2,
-        last_name:"Jakubowski",
+        last_name:"Sheikh",
         username: "jamiel@m0deler.com",
         password: ""
       }
