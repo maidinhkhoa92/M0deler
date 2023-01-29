@@ -1,7 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { forwardRef, ForwardedRef } from "react"
 import clsx from 'clsx'
+import { range } from "lodash"
 
-const Pagination = () => {
+type Props = {
+  pages: number
+  ref?: ForwardedRef<{ page: number }>
+  page: number
+  setPage: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
+  if (pages < 0) return <></>
+
   return (
     <div className='row'>
       <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'></div>
@@ -9,8 +20,8 @@ const Pagination = () => {
         <div id='kt_table_users_paginate'>
           <ul className='pagination'>
             <li className={clsx('page-item', {
-              active: true,
-              disabled: false,
+              active: false,
+              disabled: page === 1,
               previous: true,
               next: false,
             })}>
@@ -24,8 +35,8 @@ const Pagination = () => {
                 Previous
               </a>
             </li>
-            <li className={clsx('page-item', {
-              active: false,
+            {range(1, pages + 1).map((it, key) => <li key={key} className={clsx('page-item', {
+              active: page === it,
               disabled: false,
               previous: false,
               next: false,
@@ -36,13 +47,15 @@ const Pagination = () => {
                   'me-5': false,
                 })}
                 style={{ cursor: 'pointer' }}
+                onClick={() => setPage(it)}
               >
-                1
+                {it}
               </a>
-            </li>
+            </li>)}
+            
             <li className={clsx('page-item', {
               active: false,
-              disabled: false,
+              disabled: page === pages,
               previous: false,
               next: true,
             })}>
@@ -61,6 +74,6 @@ const Pagination = () => {
       </div>
     </div>
   )
-}
+})
 
 export default Pagination

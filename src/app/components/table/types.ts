@@ -20,9 +20,7 @@ export interface TableProps {
   className?: string
   data: Data[]
   loading?: boolean
-  page?: number
-  totalRecord?: number
-  onPagination?: (nextPage: number) => Promise<void> | void
+  isPaging?: boolean
 }
 
 export interface THeadProps {
@@ -33,4 +31,6 @@ export interface THeadProps {
 export interface TBodyProps {
   columns: Column[]
   data: Data[]
+  page?: number
+  isPaging?: boolean
 }

@@ -25,7 +25,7 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<VirtualEconomiesWrapper />} />
-        <Route path="sandbox" element={<SandboxWrapper />} />
+        <Route path="sandbox/:id" element={<SandboxWrapper />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
