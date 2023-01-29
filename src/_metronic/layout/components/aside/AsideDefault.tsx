@@ -1,10 +1,14 @@
+import {Link} from 'react-router-dom'
 import clsx from 'clsx'
 import {useLayout} from '../../core'
+import {toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
 import {AsideUserMenu} from '../../../partials'
+import {useThemeMode} from '../../../partials/layout/theme-mode/ThemeModeProvider'
 
 const AsideDefault = () => {
   const {classes} = useLayout()
+  const {mode} = useThemeMode()
   return (
     <div
       id='kt_aside'
@@ -17,25 +21,25 @@ const AsideDefault = () => {
       data-kt-drawer-direction='start'
       data-kt-drawer-toggle='#kt_aside_toggle'
     >
-      {/* <div className='aside-logo flex-column-auto px-9 mb-9' id='kt_aside_logo'>
+      <div className='aside-logo flex-column-auto px-9 mb-1' id='kt_aside_logo'>
         <Link to='/dashboard'>
           {mode === 'light' && (
             <img
               alt='Logo'
-              className='h-20px logo theme-light-show'
-              src={toAbsoluteUrl('/media/logos/demo3.svg')}
+              className='h-50px logo theme-light-show'
+              src={toAbsoluteUrl('/media/logos/default.png')}
             />
           )}
 
           {mode === 'dark' && (
             <img
               alt='Logo'
-              className='h-20px logo theme-dark-show'
-              src={toAbsoluteUrl('/media/logos/demo3-dark.svg')}
+              className='h-50px logo theme-dark-show'
+              src={toAbsoluteUrl('/media/logos/default.png')}
             />
           )}
         </Link>
-      </div> */}
+      </div>
 
       {/* begin::Aside menu */}
       <div id='kt_aside_menu' className='aside-menu flex-column-fluid ps-5 pe-3 mb-9'>
