@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import { Table } from "../../components"
-import { getAccountBalances } from "./_request"
+import { getAccountBalances } from "../../modules/balances/_request"
 
 const ColumnsSandbox = [
   {
@@ -38,7 +38,7 @@ const Accounts = () => {
     [`Accounts`, id],
     () => getAccountBalances(id || "")
   )
-  console.log(data)
+
   return (
     <Table className='mb-5 mb-xl-10' title="Accounts" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} />
   )

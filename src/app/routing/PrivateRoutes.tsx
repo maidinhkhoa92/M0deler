@@ -9,6 +9,7 @@ import {WithChildren} from '../../_metronic/helpers'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
 import { VirtualEconomiesWrapper } from "../pages/virtual-economies"
 import { SandboxWrapper } from "../pages/sandbox"
+import { ChartWrapper } from "../pages/chart"
 
 const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -26,6 +27,7 @@ const PrivateRoutes = () => {
         {/* Pages */}
         <Route path='dashboard' element={<VirtualEconomiesWrapper />} />
         <Route path="sandbox/:id" element={<SandboxWrapper />} />
+        <Route path="chart/:id" element={<ChartWrapper />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}

@@ -11,7 +11,7 @@ export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 // Server should return AuthModel
 export function login(email: string, password: string): Promise<{data: AuthModel}> {
   return new Promise((resolve, reject) => {
-    if (email !== "jamiel@m0deler.com" || password !== "jamiel123") {
+    if (email !== "jamiel@m0deler.com" || password !== "jamiel123jamielx") {
       reject(new Error("Failed to login"))
       return
     }

@@ -20,7 +20,7 @@ export function AsideMenuMain() {
       <AsideMenuItem
         to='/builder'
         icon='/media/icons/duotune/arrows/arr001.svg'
-        title='Tools'
+        title='Sandbox App Store'
         fontIcon='bi-layers'
       />
       {/* <div className='menu-item'>

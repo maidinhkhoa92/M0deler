@@ -56,22 +56,22 @@ export const statsData: Array<SidebarStat> = [
   {
     category: 'tickets',
     data: {
-      title: 'Support Tickets',
+      title: 'Sandbox App Store',
       items: [
         {
           label: 'Pending',
           value: '28',
         },
         {
-          label: 'Completed',
+          label: 'Published',
           value: '204',
         },
         {
-          label: 'On Hold',
+          label: 'Cloned',
           value: '76',
         },
         {
-          label: 'In Progress',
+          label: 'Running',
           value: '9',
         },
       ],

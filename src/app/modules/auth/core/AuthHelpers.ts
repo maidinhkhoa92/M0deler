@@ -48,7 +48,7 @@ const removeAuth = () => {
 }
 
 export function setupAxios(axios: any) {
-  // axios.defaults.headers.Accept = 'application/json'
+  axios.defaults.headers["X-API-KEY"] = process.env.REACT_APP_X_API_KEY
   // axios.interceptors.request.use(
   //   (config: {headers: {Authorization: string}}) => {
   //     const auth = getAuth()

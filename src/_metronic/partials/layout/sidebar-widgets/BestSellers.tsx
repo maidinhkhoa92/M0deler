@@ -11,7 +11,7 @@ const BestSellers = () => {
       <div className='card-header align-items-center'>
         {/*begin::Title*/}
         <h3 className='card-title fw-bolder text-white fs-3'>Best Sellers</h3>
-        {/*end::Title*/}
+        {/*end::Title*/}M0deler Add-Ons
 
         {/*begin::Toolbar*/}
         <div className='card-toolbar'>

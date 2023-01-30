@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 
 import { Table } from "../../components"
-import { getTransactions } from "./_request"
+import { getTransactions } from "../../modules/transactions/_request"
 
 const ColumnsSandbox = [
   {
