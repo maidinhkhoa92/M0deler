@@ -6,6 +6,7 @@ import {
   useParams
 } from "react-router-dom";
 import {map} from "lodash"
+import moment from "moment"
 
 import { getTransactions } from "../../modules/transactions/_request"
 import {getCSS, getCSSVariableValue} from '../../../_metronic/assets/ts/_utils'
@@ -39,7 +40,7 @@ const Scatter: React.FC<Props> = ({className}) => {
     }
   }, [chartRef, mode, data])
 
-  const xData = useMemo(() => map(data || [], (el) => el.Timestamp), [data])
+  const xData = useMemo(() => map(data || [], (el) => moment(el.Timestamp).format("MM-DD-YYYY h:mm")), [data])
   const yData = useMemo(() => map(data || [], (el) => el['Ending Bal']), [data])
 
   const refreshChart = () => {
@@ -61,7 +62,7 @@ const Scatter: React.FC<Props> = ({className}) => {
     <div className={`card ${className}`}>
       <div className='card-header border-0 pt-5'>
         <h3 className='card-title align-items-start flex-column'>
-          <span className='card-label fw-bold fs-3 mb-1'>Histogram of Transaction Amounts Data comes from Transactions API endpoint</span>
+          <span className='card-label fw-bold fs-3 mb-1'>Histogram of Transaction Amounts Data</span>
         </h3>
       </div>
       <div className='card-body'>
@@ -73,7 +74,7 @@ const Scatter: React.FC<Props> = ({className}) => {
 
 export default Scatter
 
-function getChartOptions(height: number, x: number[], y: number[]): ApexOptions {
+function getChartOptions(height: number, x: string[], y: number[]): ApexOptions {
   const labelColor = getCSSVariableValue('--bs-gray-500')
   const borderColor = getCSSVariableValue('--bs-gray-200')
   const baseColor = getCSSVariableValue('--bs-primary')
