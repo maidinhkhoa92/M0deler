@@ -6,43 +6,43 @@ import { getCBDC } from "./_request"
 const ColumnsSandbox = [
   {
     className: 'ps-4 min-w-125px rounded-start',
-    field: "cbdc_name",
-    headerName: "Name"
+    accessor: "cbdc_name",
+    Header: "Name"
   },
   {
     className: 'min-w-125px',
-    field: "engine",
-    headerName: "Engine"
+    accessor: "engine",
+    Header: "Engine"
   },
   {
     className: 'min-w-125px',
-    field: "wallets_qty",
-    headerName: "Wallets"
+    accessor: "wallets_qty",
+    Header: "Wallets"
   },
   {
     className: 'min-w-125px',
-    field: "tx_avg_nominal_amt",
-    headerName: "TX Avg"
+    accessor: "tx_avg_nominal_amt",
+    Header: "TX Avg"
   },
   {
     className: 'min-w-125px',
-    field: "tx_nominal_amt_sd",
-    headerName: "Tx SD"
+    accessor: "tx_nominal_amt_sd",
+    Header: "Tx SD"
   },
   {
     className: 'min-w-125px',
-    field: "txs",
-    headerName: "Txs"
+    accessor: "txs",
+    Header: "Txs"
   },
   {
     className: 'min-w-125px',
-    field: "initial_balance_avg",
-    headerName: "Initial Bal"
+    accessor: "initial_balance_avg",
+    Header: "Initial Bal"
   },
   {
     className: 'min-w-125px',
-    field: "initial_bal_sd",
-    headerName: "Initial Bal SD"
+    accessor: "initial_bal_sd",
+    Header: "Initial Bal SD"
   },
 ]
 

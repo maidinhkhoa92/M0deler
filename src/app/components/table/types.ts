@@ -1,32 +1,26 @@
-import { ReactNode } from "react";
+import React from "react";
+import { Column } from "react-table"
 
 interface Data {
   [key: string]: any;
 }
 
-export interface Column {
-  className?: string
-  field: string
-  headerName: string
-  width?: number | string
-  renderCell?: ({ value, row }: { value: string; row: Data }) => ReactNode
-  valueFormatter?: ({ value, row }: { value: string; row: Data }) => ReactNode
-}
-
-export interface TableProps {
+export interface TableProps{
   columns: Column[]
+  data: any;
   title?: string
   subtitle?: string
   className?: string
-  data: Data[]
   loading?: boolean
-  isPaging?: boolean
   isLoading?: boolean
+  pageSize?: number
 }
 
 export interface THeadProps {
   columns: Column[]
   data: Data[]
+  setSortParams: React.Dispatch<React.SetStateAction<{ key: string[]; order: Array<"asc" | "desc"> }>>
+  sortParams: { key: string[]; order: Array<"asc" | "desc"> }
 }
 
 export interface TBodyProps {
@@ -34,4 +28,5 @@ export interface TBodyProps {
   data: Data[]
   page?: number
   isPaging?: boolean
+  perPage?: number
 }

@@ -8,29 +8,29 @@ import { getSandbox } from "./_request"
 const ColumnsSandbox = [
   {
     className: 'ps-4 min-w-125px rounded-start',
-    field: "sandbox_name",
-    headerName: "Name"
+    accessor: "sandbox_name",
+    Header: "Name"
   },
   {
     className: 'min-w-125px',
-    field: "economy_name",
-    headerName: "Economy"
+    accessor: "economy_name",
+    Header: "Economy"
   },
   {
     className: 'min-w-125px',
-    field: "cbdc_name",
-    headerName: "CBDC"
+    accessor: "cbdc_name",
+    Header: "CBDC"
   },
   {
     className: 'min-w-125px rounded-end',
-    field: "sandbox_name",
-    headerName: "",
-    renderCell: ({ value }: { value: string; }) => (
+    accessor: "button",
+    Header: "",
+    Cell: ({ cell }: { cell: any }) => (
       <>
-        <Link to={`/sandbox/${value}`} className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 mr-2' >
+        <Link to={`/sandbox/${cell.row.values.sandbox_name}`} className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 mr-2' >
           <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
         </Link>
-        <Link to={`/chart/${value}`} className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1' >
+        <Link to={`/chart/${cell.row.values.sandbox_name}`} className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1' >
           <i className="bi bi-graph-down fs-2x"></i>
         </Link>
       </>

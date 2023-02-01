@@ -1,4 +1,4 @@
-import {EnableSidebar} from '../../../_metronic/layout/core'
+import {DisableSidebar} from '../../../_metronic/layout/core'
 import Accounts from "./Accounts"
 import Transactions from "./Transactions"
 
@@ -11,9 +11,9 @@ const SandboxPage = () => (
 
 const SandboxWrapper = () => {
   return (
-    <EnableSidebar>
+    <DisableSidebar>
       <SandboxPage />
-    </EnableSidebar>
+    </DisableSidebar>
   )
 }
 

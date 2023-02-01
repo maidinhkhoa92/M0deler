@@ -9,23 +9,23 @@ import { getAccountBalances } from "../../modules/balances/_request"
 const ColumnsSandbox = [
   {
     className: 'ps-4 min-w-125px rounded-start',
-    field: "Wallet",
-    headerName: "Wallet"
+    accessor: "Wallet",
+    Header: "Wallet"
   },
   {
     className: 'min-w-125px',
-    field: "Initial Bal",
-    headerName: "Initial Bal"
+    accessor: "Initial Bal",
+    Header: "Initial Bal"
   },
   {
     className: 'min-w-125px',
-    field: "Curr. Balance",
-    headerName: "Curr. Balance"
+    accessor: "Curr. Balance",
+    Header: "Curr. Balance"
   },
   {
     className: 'min-w-125px',
-    field: "Tx Count",
-    headerName: "Tx Count"
+    accessor: "Tx Count",
+    Header: "Tx Count"
   },
 ]
 

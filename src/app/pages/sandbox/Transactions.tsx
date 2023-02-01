@@ -9,38 +9,38 @@ import { getTransactions } from "../../modules/transactions/_request"
 const ColumnsSandbox = [
   {
     className: 'ps-4 min-w-125px rounded-start',
-    field: "Timestamp",
-    headerName: "Timestamp"
+    accessor: "Timestamp",
+    Header: "Timestamp"
   },
   {
     className: 'min-w-125px',
-    field: "Sender",
-    headerName: "Sender"
+    accessor: "Sender",
+    Header: "Sender"
   },
   {
     className: 'min-w-125px',
-    field: "Receiver",
-    headerName: "Receiver"
+    accessor: "Receiver",
+    Header: "Receiver"
   },
   {
     className: 'min-w-125px',
-    field: "Initial Bal",
-    headerName: "Initial Bal"
+    accessor: "Initial Bal",
+    Header: "Initial Bal"
   },
   {
     className: 'min-w-125px',
-    field: "Amount",
-    headerName: "Amount"
+    accessor: "Amount",
+    Header: "Amount"
   },
   {
     className: 'min-w-125px',
-    field: "Ending Bal",
-    headerName: "Ending Bal"
+    accessor: "Ending Bal",
+    Header: "Ending Bal"
   },
   {
     className: 'min-w-125px',
-    field: "Tx Count",
-    headerName: "Initial Bal SD"
+    accessor: "Tx Count",
+    Header: "Initial Bal SD"
   },
 ]
 
@@ -55,7 +55,7 @@ const Transactions = () => {
   )
 
   return (
-    <Table className='mb-5 mb-xl-10' title="Transactions" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} isPaging/>
+    <Table className='mb-5 mb-xl-10' title="Transactions" columns={ColumnsSandbox} data={data || []} isLoading={isLoading} pageSize={50}/>
   )
 }
 

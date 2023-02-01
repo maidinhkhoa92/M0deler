@@ -1,65 +1,61 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo, useState } from 'react'
-import { THeadProps, TBodyProps, TableProps } from "./types"
+import React from 'react'
+import { useTable, useSortBy, usePagination, useGlobalFilter, Row } from "react-table"
+import { debounce } from "lodash"
+import { TableProps } from "./types"
 import Pagination from './pagination'
 
-const THeader: React.FC<THeadProps> = ({ columns }) => {
-  return (
-    <thead>
-      <tr className='fw-bold text-muted bg-light'>
-        {columns.map((item, key) => <th className={item.className || ""} key={key}>{item.headerName}</th>)}
-      </tr>
-    </thead>
-  )
-}
+const GlobalFilter: React.FC<{
+  preGlobalFilteredRows: Row<{}>[]
+  globalFilter: any
+  setGlobalFilter: (filterValue: any) => void
+}> = ({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) => {
+    const count = preGlobalFilteredRows.length
+    const [value, setValue] = React.useState(globalFilter)
+    const onChange = debounce(value => {
+      setGlobalFilter(value || undefined)
+    }, 200)
 
-const TBody: React.FC<TBodyProps> = ({
-  data,
-  columns,
-  isPaging,
-  page
-}) => (
-  <tbody>
-    {data.map((row, i) => {
-      if (isPaging && page) {
-        if (i < (page - 1) * 50 || i >= page * 50) {
-          return <></>
-        }
-      }
+    return (
+      <span>
+        Search:{' '}
+        <input
+          value={value || ""}
+          onChange={e => {
+            setValue(e.target.value);
+            onChange(e.target.value);
+          }}
+          placeholder={`${count} records...`}
+          style={{
+            fontSize: '1.1rem',
+            border: '0',
+          }}
+        />
+      </span>
+    )
+  }
 
-      return (
-        <tr key={i}>
-          {columns.map((column, k) => {
-            const { renderCell, valueFormatter } = column
-            return (
-              <td key={k} width={column.width}>
-                {renderCell
-                  ? renderCell({ value: row[column.field], row })
-                  : valueFormatter
-                    ? valueFormatter({ value: row[column.field], row })
-                    : row[column.field]}
-              </td>
-            )
-          })}
-        </tr>
-      )
-    })}
-  </tbody>
-)
-
-const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data, isPaging, isLoading }) => {
-  const [page, setPage] = useState<number>(1)
-
-  const pages = useMemo(() => {
-    if (data.length < 50) {
-      return 0
-    }
-    let calPage = data.length / 50
-    if (data.length % 50 > 0) {
-      calPage++
-    }
-    return calPage
-  }, [data])
+const Table: React.FC<TableProps> = ({ className, title, subtitle, isLoading, columns, data, pageSize = 10 }) => {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    pageOptions,
+    page,
+    state: { pageIndex, globalFilter },
+    gotoPage,
+    previousPage,
+    nextPage,
+    canPreviousPage,
+    canNextPage,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+  } = useTable({ columns, data, initialState: { pageIndex: 0, pageSize } }, useGlobalFilter, useSortBy, usePagination)
 
   return (
     <div className={`card ${className} position-relative`}>
@@ -68,6 +64,11 @@ const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data
           {title && <span className='card-label fw-bold fs-3 mb-1'>{title}</span>}
           {subtitle && <span className='text-muted mt-1 fw-semibold fs-7'>{subtitle}</span>}
         </h3>
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
       </div>
       {isLoading ? (<span
         className='w-100 translate-middle-y lh-0 my-auto d-flex align-items-center justify-content-center'
@@ -77,18 +78,61 @@ const Table: React.FC<TableProps> = ({ className, title, subtitle, columns, data
       </span>) : (
         <div className='card-body py-3'>
           <div className='table-responsive'>
-            <table className='table align-middle gs-0 gy-4'>
+            <table className='table align-middle gs-0 gy-4' {...getTableProps()}>
               {/* begin::Table head */}
-              <THeader columns={columns} data={data} />
+              <thead>
+                {headerGroups.map((headerGroup) => (
+                  <tr className='fw-bold text-muted bg-light' {...headerGroup.getHeaderGroupProps()}>
+                    {headerGroup.headers.map((column) => {
+                      return (
+                        <th {...column.getHeaderProps({
+                          ...column.getSortByToggleProps(),
+                          className: "min-w-125px"
+                        })}>
+                          {column.render('Header')}
+                          <span>
+                            {column.isSorted
+                              ? column.isSortedDesc
+                                ? <i className="bi bi-arrow-down-short text-primary"></i>
+                                : <i className="bi bi-arrow-up-short text-primary"></i>
+                              : ''}
+                          </span>
+                        </th>
+                      )
+                    })}
+                  </tr>
+                ))
+                }
+
+              </thead>
               {/* end::Table head */}
               {/* begin::Table body */}
-              <TBody columns={columns} data={data} page={page} isPaging={isPaging} />
+              <tbody {...getTableBodyProps()}>
+                {
+                  page.map(row => {
+                    prepareRow(row)
+                    return (
+                      <tr {...row.getRowProps()}>
+                        {
+                          row.cells.map(cell => {
+                            return (
+                              <td {...cell.getCellProps()}>
+                                {
+                                  cell.render('Cell')}
+                              </td>
+                            )
+                          })}
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
               {/* end::Table body */}
             </table>
             {/* end::Table */}
           </div>
           {/* end::Table container */}
-          {isPaging && <Pagination pages={pages} page={page} setPage={setPage} />}
+          <Pagination canNextPage={canNextPage} canPreviousPage={canPreviousPage} nextPage={nextPage} previousPage={previousPage} gotoPage={gotoPage} pageOptions={pageOptions} pageIndex={pageIndex} />
         </div>)}
 
       {/* begin::Body */}

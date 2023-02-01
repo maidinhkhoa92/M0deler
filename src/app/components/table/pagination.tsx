@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { forwardRef, ForwardedRef } from "react"
+import React from "react"
 import clsx from 'clsx'
-import { range } from "lodash"
 
 type Props = {
-  pages: number
-  ref?: ForwardedRef<{ page: number }>
-  page: number
-  setPage: React.Dispatch<React.SetStateAction<number>>
+  canNextPage: boolean 
+  canPreviousPage: boolean
+  nextPage: () => void 
+  previousPage: () => void
+  gotoPage: (updater: number | ((pageIndex: number) => number)) => void
+  pageOptions: number[]
+  pageIndex: number
 }
 
-const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
-  if (pages < 0) return <></>
-
+const Pagination: React.FC<Props> = ({ canNextPage, canPreviousPage, nextPage, previousPage, pageOptions, gotoPage, pageIndex }) => {
+  if (pageOptions.length < 2) return null
   return (
     <div className='row'>
       <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'></div>
@@ -21,7 +22,7 @@ const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
           <ul className='pagination'>
             <li className={clsx('page-item', {
               active: false,
-              disabled: page === 1,
+              disabled: !canPreviousPage,
               previous: true,
               next: false,
             })}>
@@ -31,12 +32,13 @@ const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
                   'me-5': true,
                 })}
                 style={{ cursor: 'pointer' }}
+                onClick={previousPage}
               >
                 Previous
               </a>
             </li>
-            {range(1, pages + 1).map((it, key) => <li key={key} className={clsx('page-item', {
-              active: page === it,
+            {pageOptions.map((it, key) => <li key={key} className={clsx('page-item', {
+              active: pageIndex === it,
               disabled: false,
               previous: false,
               next: false,
@@ -47,15 +49,15 @@ const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
                   'me-5': false,
                 })}
                 style={{ cursor: 'pointer' }}
-                onClick={() => setPage(it)}
+                onClick={() => gotoPage(it)}
               >
-                {it}
+                {it + 1}
               </a>
             </li>)}
             
             <li className={clsx('page-item', {
               active: false,
-              disabled: page === pages,
+              disabled: !canNextPage,
               previous: false,
               next: true,
             })}>
@@ -65,6 +67,7 @@ const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
                   'me-5': false,
                 })}
                 style={{ cursor: 'pointer' }}
+                onClick={nextPage}
               >
                 Next
               </a>
@@ -74,6 +77,6 @@ const Pagination: React.FC<Props> = forwardRef(({ pages, page, setPage }) => {
       </div>
     </div>
   )
-})
+}
 
 export default Pagination

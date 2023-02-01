@@ -1,4 +1,4 @@
-import {EnableSidebar} from '../../../_metronic/layout/core'
+import {DisableSidebar} from '../../../_metronic/layout/core'
 import Scatter from "./scatter"
 import HistogramBalance from "./histogram-balance"
 import HistogramTransaction from "./histogram-transaction"
@@ -13,9 +13,9 @@ const ChartPage = () => (
 
 const ChartWrapper = () => {
   return (
-    <EnableSidebar>
+    <DisableSidebar>
       <ChartPage />
-    </EnableSidebar>
+    </DisableSidebar>
   )
 }
 

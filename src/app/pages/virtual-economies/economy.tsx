@@ -6,28 +6,28 @@ import { getEconomy } from "./_request"
 const ColumnsSandbox = [
   {
     className: 'ps-4 min-w-325px rounded-start',
-    field: "economy_name",
-    headerName: "Name"
+    accessor: "economy_name",
+    Header: "Name"
   },
   {
     className: 'min-w-200px',
-    field: "gdp",
-    headerName: "GDP"
+    accessor: "gdp",
+    Header: "GDP"
   },
   {
     className: 'min-w-125px',
-    field: "ir",
-    headerName: "Interest Rate"
+    accessor: "ir",
+    Header: "Interest Rate"
   },
   {
     className: 'min-w-125px',
-    field: "gr",
-    headerName: "Growth Rate"
+    accessor: "gr",
+    Header: "Growth Rate"
   },
   {
     className: 'min-w-125px',
-    field: "pop",
-    headerName: "Population"
+    accessor: "pop",
+    Header: "Population"
   },
 ]
 
